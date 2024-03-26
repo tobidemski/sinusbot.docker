@@ -4,6 +4,7 @@ set -e
 
 SINUSBOT_VERSION="1.0.2-amd64"
 
+
 case "$1" in
 
 "sinusbot")
