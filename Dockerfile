@@ -1,5 +1,5 @@
-#FROM debian:buster-slim
-FROM python:3.9-buster-slim
+#FROM debian:slim-buster
+FROM python:3.9-slim-buster
 
 LABEL description="SinusBot - TeamSpeak 3 and Discord music bot"
 LABEL version="1.0.2"
