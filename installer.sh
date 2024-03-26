@@ -61,10 +61,35 @@ EOT
 	echo 'YoutubeDLPath = "/usr/local/bin/yt-dlp"' >> config.ini.configured
 	echo "Successfully installed yt-dlp"
 	;;
-"teamspeak")
+"teamspeak-latest")
 	echo "Installing TeamSpeak Client..."
 	# Get latest TeamSpeak client download URL
 	DOWNLOAD_URL=$(curl -s https://www.teamspeak.com/versions/client.json | jq -r '.linux.x86_64.mirrors["teamspeak.com"]')
+
+	# Download TeamSpeak client
+	echo "Downloading TeamSpeak Client..."
+	curl -s -o TeamSpeak3-Client-linux_amd64.run "$DOWNLOAD_URL"
+
+	# Install TeamSpeak Client
+	chmod 755 TeamSpeak3-Client-linux_amd64.run
+	yes | ./TeamSpeak3-Client-linux_amd64.run
+	rm TeamSpeak3-Client-linux_amd64.run
+
+	# Copy SinusBot plugin
+	mkdir TeamSpeak3-Client-linux_amd64/plugins
+	cp plugin/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64/plugins
+
+	# Remove glx-integration lib
+	rm TeamSpeak3-Client-linux_amd64/xcbglintegrations/libqxcb-glx-integration.so
+
+	# Set the TS3Path to the config.ini
+	sed -i "s|^TS3Path.*|TS3Path = \"/opt/sinusbot/TeamSpeak3-Client-linux_amd64/ts3client_linux_amd64\"|g" config.ini.configured
+	echo "Successfully installed the TeamSpeak Client"
+	;;
+"teamspeak-3.5.6") #https://forum.sinusbot.com/threads/sinusbot-version-1-0-2-und-debian-12.8829/
+	echo "Installing TeamSpeak Client..."
+	# Get latest TeamSpeak client download URL
+	DOWNLOAD_URL="https://files.teamspeak-services.com/releases/client/3.5.6/TeamSpeak3-Client-linux_amd64-3.5.6.run"
 
 	# Download TeamSpeak client
 	echo "Downloading TeamSpeak Client..."

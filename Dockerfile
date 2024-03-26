@@ -1,5 +1,5 @@
 #FROM debian:buster-slim
-FROM python:3.9-slim-bullseye
+FROM python:3.9-slim-bookworm
 
 LABEL description="SinusBot - TeamSpeak 3 and Discord music bot"
 LABEL version="1.0.2"
@@ -7,13 +7,6 @@ LABEL version="1.0.2"
 # Install dependencies and clean up afterwards
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates bzip2 unzip curl procps libpci3 libxslt1.1 libxkbcommon0 locales && \
-    rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
-
-# Install dependencies for Teamspeak
-# libevent-2.1-7: https://community.teamspeak.com/t/teamspeak-wont-open-after-update/42336
-# libxkbcommon-x11-0: https://bbs.archlinux.org/viewtopic.php?id=182016
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libevent-2.1-7 liblcms2-2 libatomic1 libxkbcommon-x11-0 && \
     rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 # Install dependencies and clean up afterwards
@@ -42,7 +35,7 @@ RUN bash installer.sh yt-dlp
 RUN bash installer.sh text-to-speech
 
 # Download/Install TeamSpeak Client
-RUN bash installer.sh teamspeak
+RUN bash installer.sh teamspeak-3.5.6
 
 ADD entrypoint.sh .
 RUN chmod 755 entrypoint.sh
