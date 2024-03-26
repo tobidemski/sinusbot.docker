@@ -22,22 +22,20 @@ ENV LANGUAGE en_US:en
 
 WORKDIR /opt/sinusbot
 
-ADD /text.txt .
-
-ADD /install.sh .
-RUN chmod 755 install.sh
+ADD installer.sh .
+RUN chmod 755 installer.sh
 
 # Download/Install SinusBot
-RUN bash install.sh sinusbot
+RUN bash installer.sh sinusbot
 
 # Download/Install yt-dlp
-RUN bash install.sh yt-dlp
+RUN bash installer.sh yt-dlp
 
 # Download/Install Text-to-Speech
-RUN bash install.sh text-to-speech
+RUN bash installer.sh text-to-speech
 
 # Download/Install TeamSpeak Client
-RUN bash install.sh teamspeak
+RUN bash installer.sh teamspeak
 
 ADD entrypoint.sh .
 RUN chmod 755 entrypoint.sh
