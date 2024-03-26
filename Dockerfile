@@ -1,5 +1,5 @@
-#FROM debian:slim-buster
-FROM python:3.9-slim-buster
+#FROM debian:buster-slim
+FROM python:3.9-bullseye
 
 LABEL description="SinusBot - TeamSpeak 3 and Discord music bot"
 LABEL version="1.0.2"
@@ -12,7 +12,7 @@ RUN apt-get update && \
 # Install dependencies for Teamspeak
 # https://community.teamspeak.com/t/teamspeak-wont-open-after-update/42336
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libevent-2.1-6 && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libevent-2.1-7 liblcms2-2 libatomic1 && \
     rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 # Install dependencies and clean up afterwards
