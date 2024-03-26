@@ -22,7 +22,7 @@ ENV LANGUAGE en_US:en
 
 WORKDIR /opt/sinusbot
 
-ADD /install.sh .
+ADD install.sh .
 RUN chmod 755 install.sh
 
 # Download/Install SinusBot
