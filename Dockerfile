@@ -9,6 +9,12 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates bzip2 unzip curl procps libpci3 libxslt1.1 libxkbcommon0 locales && \
     rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
+# Install dependencies for Teamspeak
+# https://community.teamspeak.com/t/teamspeak-wont-open-after-update/42336
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libevent-2.1-7 && \
+    rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
+
 # Install dependencies and clean up afterwards
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends x11vnc xvfb libxcursor1 libnss3 libegl1-mesa libasound2 libglib2.0-0 libxcomposite-dev less jq && \
